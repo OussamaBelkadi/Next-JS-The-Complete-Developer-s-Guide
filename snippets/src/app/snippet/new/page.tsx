@@ -7,21 +7,21 @@ export default function SnippetComponent() {
         'use server';
        
         //  Check the user's input and make sure they're valid
-       const title = formData.get("title");
-       const code = formData.get("code");
+       const title = formData.get("title") as string;
+       const code = formData.get("code") as string;
 
        // Create a new record in the database
        const snippet = await db.snippet.create({
            data:{
-                title,
-                code
+              title,
+              code
            }
-       })
+       });
 
         // Display the content of the data is persisting in database 
         console.log(snippet);
 
-        // Redirection to another page 
+        // // Redirection to another page 
         redirect('/');
     }
 
@@ -50,7 +50,9 @@ export default function SnippetComponent() {
                     className="border rounded p-2 w-full"
                  />
             </div>
-            <button type="submit" className="rounded p-2 w-full bg-blue-300">Submit</button>
+            <button type="submit" className="rounded p-2 w-full bg-blue-300">
+                Submit
+            </button>
         </form>
     )
 }
