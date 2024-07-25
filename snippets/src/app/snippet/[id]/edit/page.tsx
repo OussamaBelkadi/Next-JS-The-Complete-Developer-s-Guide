@@ -1,5 +1,6 @@
 import { db } from "@/db"
 import { notFound } from "next/navigation"
+import { Editor } from "@monaco-editor/react"
 import SnippetEditForm from "@/component/SnippetEditForm"
 
 interface SnippetParam{
@@ -16,10 +17,14 @@ export default async function SnippetEditPage(props:SnippetParam) {
         }
     })
 
+
     if (!snippet) {
         return notFound;
     }
 
+    async function updateCode(id: number, code: string) {
+        'use server'
+    }
 
     return( 
         <div>
