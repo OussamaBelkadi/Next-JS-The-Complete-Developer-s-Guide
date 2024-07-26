@@ -22,9 +22,6 @@ export default async function SnippetEditPage(props:SnippetParam) {
         return notFound;
     }
 
-    async function updateCode(id: number, code: string) {
-        'use server'
-    }
 
     return( 
         <div>

@@ -18,8 +18,11 @@ export default async function Snippet(props: SnippetParam) {
     }
 
     return (
-        <div>
-            {snippet?.title}
+        <div className='border border-gray-400'>
+           
+            <h3> {snippet?.title} </h3>
+            <button className='border border-gray-300'>Edit</button>
+
         </div>
     )
 }
