@@ -5,22 +5,20 @@ import * as actions from "@/actions"
 export  default async function Home() {
   const snippet = await db.snippet.findMany();
   const deleteSnippet = actions.deleteSnippet.bind(null, 2)
-
-  const result  = snippet.map((snippet)=>{
+  // i 
     
     return (
-      <div className=" border my-2 text-3xl border border-gray-300 flex justify-center">
-        {snippet.title}
-        <Link href={`snippet/${snippet.id}/edit`}>Edit</Link>
-        <form action={deleteSnippet}>
-          <button className="bg-blue-300 border">Delete</button>
-        </form>
-      </div>
+      <div>
+       { snippet.map((snippet, index )=>(
+          <div key={index} className=" border my-2 text-3xl border border-gray-300 flex justify-center">
+            {snippet.title}
+            <Link href={`snippet/${snippet.id}/edit`}>Edit</Link>
+            <form action={deleteSnippet}>
+              <button className="bg-blue-300 border">Delete</button>
+            </form>
+          </div>
+          ))
+        }
+        </div>
     )
-  })
-  return (
-   <div >
-     {result}
-   </div>
-  );
-}
+};
