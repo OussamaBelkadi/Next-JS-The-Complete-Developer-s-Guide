@@ -2,7 +2,7 @@
 
 import { db } from '@/db';
 import { redirect } from "next/navigation";
-import { cache } from 'react';
+import { revalidatePath } from 'next/cache';
 
 export async function updateCode(id: number, code: string) {
     // code to update the code 
@@ -21,7 +21,8 @@ export async function deleteSnippet(id: number) {
             id
         }
     })
-    
+    revalidatePath('/')
+    redirect('/');
 }
 export async function editSnippet(code: string) {
     // Update Snippet
@@ -64,6 +65,8 @@ export async function createSnippet(formState: {message:string}, formData: FormD
             }
         }
    }
-    // // Redirection to another page 
+    // On demande referReach page    
+   revalidatePath('/')
+   // Redirection to another page 
     redirect('/');
 }
