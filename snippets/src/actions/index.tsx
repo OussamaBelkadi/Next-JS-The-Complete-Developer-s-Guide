@@ -3,6 +3,7 @@
 import { db } from '@/db';
 import { redirect } from "next/navigation";
 import { revalidatePath } from 'next/cache';
+import { Snippet } from 'next/font/google';
 
 export async function updateCode(id: number, code: string) {
     // code to update the code 
@@ -13,7 +14,10 @@ export async function updateCode(id: number, code: string) {
             data: { code }
        }
     )
-    
+    // refresh the page
+    revalidatePath(`snippet/${id}`);
+
+    redirect(`snippet/${id}`);
 } 
 export async function deleteSnippet(id: number) {
     db.snippet.delete({
@@ -69,4 +73,15 @@ export async function createSnippet(formState: {message:string}, formData: FormD
    revalidatePath('/')
    // Redirection to another page 
     redirect('/');
+}
+
+export async function generateStaticParams() {
+    const snippets = await db.snippet.findMany()
+
+    return  snippets.map((snippet) => {  
+             return {
+                id: snippet.id
+            }
+        } 
+    )
 }
